@@ -25,7 +25,6 @@ export default {
   async getJwt () {
     try {
       const value = await AsyncStorage.getItem('jwt')
-      console.log('value', value)
 
       if (value !== null) {
         return value
@@ -40,16 +39,16 @@ export default {
     let url = `http://dev.alethea.commonsense.io/api/${endpoint}`
 
     const headers = {
-      // 'Accept': 'application/json',
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
 
     let token = await this.getJwt()
-    console.log('token', token)
 
     if (token) {
       headers['Authorization'] = 'Bearer ' + JSON.parse(token)
     }
+    console.log(token)
 
     // if (tree.get('jwt')) {
     //   headers['Authorization'] = `Bearer ${tree.get('jwt')}`

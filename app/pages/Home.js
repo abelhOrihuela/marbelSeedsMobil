@@ -8,11 +8,10 @@ class Home extends React.Component {
     super(props)
     this.state = {
       me: {},
-      assignedMuniciplaities: []
+      assignedMunicipalities: []
     }
   }
   componentDidAppear () {
-    console.log('mount Home')
   }
   componentWillMount () {
     this._loadInitialState()
@@ -20,13 +19,13 @@ class Home extends React.Component {
   async _loadInitialState () {
     const user = await AsyncStorage.getItem('me')
     this.setState({me: JSON.parse(user)})
-    const assignedMuniciplaities = await api.get('locations/municipalities')
+    const assignedMunicipalities = await api.get('locations/municipalities')
 
-    console.log('assignedMuniciplaities', assignedMuniciplaities)
+    console.log('assignedMunicipalities', assignedMunicipalities)
 
     this.setState({
       user,
-      assignedMuniciplaities: assignedMuniciplaities.data
+      assignedMunicipalities: assignedMunicipalities.data
     })
   }
   logout () {
@@ -36,17 +35,13 @@ class Home extends React.Component {
   }
 
   _onPress (e) {
-    console.log(e)
-
     const navigation = this.props.navigation
-    navigation.navigate('Detail', {municipality: e})
+    navigation.navigate('Reports', {municipality: e})
   }
 
   render () {
     let userName = ''
-    console.log(this.state)
-
-    let list = <FlatList data={this.state.assignedMuniciplaities} renderItem={({item}) => <TouchableOpacity style={styles.item}
+    let list = <FlatList data={this.state.assignedMunicipalities} keyExtractor={(x, i) => i} renderItem={({item}) => <TouchableOpacity style={styles.item}
       onPress={(e) => { this._onPress(item) }}>
       <View>
         <Text style={styles.itemName}>
@@ -58,17 +53,18 @@ class Home extends React.Component {
     if (this.state.me.user) {
       userName = this.state.me.user.screenName
     }
+    // <TouchableOpacity style={styles.btn} onPress={(e) => { this.logout(e) }}>
+    //   <Text>Logout</Text>
+    // </TouchableOpacity>
+
     return (
       <View behavior='padding' style={styles.wrapper}>
         <View style={styles.container}>
           <Text style={styles.header}>Welcome {userName}</Text>
-
-          <TouchableOpacity style={styles.btn} onPress={(e) => { this.logout(e) }}>
-            <Text>Logout</Text>
-          </TouchableOpacity>
-
           {list}
-
+          <TouchableOpacity style={styles.btn} onPress={(e) => { this.logout(e) }}>
+            <Text style={styles.textBtn}>Logout</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -84,13 +80,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // justifyContent: 'center',
     backgroundColor: 'white',
-    paddingLeft: 4,
-    paddingRight: 4
+    paddingLeft: 10,
+    paddingRight: 10
     // borderWidth: 8,
     // borderColor: 'blue'
+
   },
   item: {
-    alignItems: 'center',
+    // alignItems: 'center',
     width: 400,
     marginTop: 2,
     marginBottom: 2,
@@ -130,7 +127,11 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     backgroundColor: '#00c4a7',
     padding: 20,
+    marginBottom: 5,
     alignItems: 'center'
+  },
+  textBtn: {
+    color: 'white'
   }
 })
 

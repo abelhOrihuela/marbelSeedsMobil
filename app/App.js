@@ -7,7 +7,9 @@ import { StackNavigator } from 'react-navigation'
 
 import Login from './pages/Login'
 import Home from './pages/Home'
-import Detail from './pages/Detail'
+import Reports from './pages/Reports'
+import NewReport from './pages/NewReport'
+import DetailReport from './pages/DetailReport'
 
 const Aplication = StackNavigator({
   Login: {
@@ -18,9 +20,19 @@ const Aplication = StackNavigator({
     screen: Home,
     left: null
   },
-  Detail: {
+  Reports: {
     path: 'detail',
-    screen: Detail,
+    screen: Reports,
+    left: null
+  },
+  NewReport: {
+    path: 'newReport',
+    screen: NewReport,
+    left: null
+  },
+  DetailReport: {
+    path: 'detailReport',
+    screen: DetailReport,
     left: null
   }
 }, {

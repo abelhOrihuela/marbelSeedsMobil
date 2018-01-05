@@ -5,8 +5,10 @@ import { Text,
   TextInput,
   TouchableOpacity,
   AsyncStorage,
-  StyleSheet
+  StyleSheet,
+  Keyboard
 } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 
 class Login extends React.Component {
   constructor (props) {
@@ -17,7 +19,6 @@ class Login extends React.Component {
     }
   }
   componentDidAppear () {
-    console.log('mount Login')
   }
   componentWillMount () {
     this._loadInitialState()
@@ -28,22 +29,28 @@ class Login extends React.Component {
       const value = await AsyncStorage.getItem('user')
       if (value !== null) {
         this.me()
-        console.log(value)
       }
     } catch (error) {
-      console.log(error)
     }
   }
 
   async me () {
-    const navigation = this.props.navigation
     var data
     try {
       data = await api.get('user/me')
       await AsyncStorage.setItem('me', JSON.stringify(data))
-      navigation.navigate('Home')
+
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Home'
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
+      // navigation.navigate('Home')
     } catch (e) {
-      console.log(e)
     }
   }
 
@@ -53,9 +60,9 @@ class Login extends React.Component {
       data = await api.post('user/login', { 'email': this.state.email, 'password': this.state.password })
       await AsyncStorage.setItem('user', JSON.stringify(data))
       await AsyncStorage.setItem('jwt', JSON.stringify(data.jwt))
+      Keyboard.dismiss()
       await this.me()
     } catch (e) {
-      console.log(e)
     }
   }
 
@@ -67,7 +74,7 @@ class Login extends React.Component {
           <TextInput style={styles.textInput} placeholder='Email' onChangeText={(email) => this.setState({email})} value={this.state.email} />
           <TextInput style={styles.textInput} placeholder='Password' onChangeText={(password) => this.setState({password})} value={this.state.password} secureTextEntry />
           <TouchableOpacity style={styles.btn} onPress={(e) => { this.login(e) }}>
-            <Text>Login</Text>
+            <Text style={styles.textBtn}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -104,6 +111,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#00c4a7',
     padding: 20,
     alignItems: 'center'
+  },
+  textBtn: {
+    color: 'white'
   }
 })
 
