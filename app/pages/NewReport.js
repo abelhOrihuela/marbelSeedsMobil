@@ -56,8 +56,8 @@ class NewReport extends React.Component {
       data = await api.post('reports',
         { 'description': this.state.text,
           'location': state.params.municipality.uuid,
-          'latitude': this.state.latitude,
-          'longitude': this.state.longitude })
+          'geolocation': [this.state.latitude, this.state.longitude]
+        })
 
       console.log(data)
       const navigation = this.props.navigation
