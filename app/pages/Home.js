@@ -31,6 +31,7 @@ class Home extends React.Component {
   logout () {
     const navigation = this.props.navigation
     AsyncStorage.removeItem('user')
+    AsyncStorage.removeItem('jwt')
     navigation.navigate('Login')
   }
 
