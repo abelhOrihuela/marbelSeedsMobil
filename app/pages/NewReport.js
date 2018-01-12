@@ -31,7 +31,7 @@ class NewReport extends React.Component {
         })
       },
       (error) => console.log('No se pudo obtener tu localizacion' + error),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
     )
   }
 
@@ -56,7 +56,7 @@ class NewReport extends React.Component {
       data = await api.post('reports',
         { 'description': this.state.text,
           'location': state.params.municipality.uuid,
-          'geolocation': [this.state.latitude, this.state.longitude]
+          'geo': [this.state.latitude, this.state.longitude]
         })
 
       console.log(data)

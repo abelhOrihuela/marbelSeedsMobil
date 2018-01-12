@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import Reports from './pages/Reports'
 import NewReport from './pages/NewReport'
 import DetailReport from './pages/DetailReport'
+import { PermissionsAndroid } from 'react-native'
 
 const Aplication = StackNavigator({
   Login: {
@@ -42,6 +43,24 @@ const Aplication = StackNavigator({
 })
 
 export default class App extends React.Component {
+  async requestGeolocationPermission () {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+      )
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('You can use the geolocation')
+      } else {
+        alert('Geolocation permission denied')
+      }
+    } catch (err) {
+      console.warn(err)
+    }
+  }
+
+  componentDidMount () {
+    this.requestGeolocationPermission()
+  }
   render () {
     return <Aplication />
   }

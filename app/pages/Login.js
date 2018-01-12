@@ -18,8 +18,7 @@ class Login extends React.Component {
       password: ''
     }
   }
-  componentDidAppear () {
-  }
+
   componentWillMount () {
     this._loadInitialState()
   }
