@@ -36,8 +36,8 @@ export default {
   },
 
   async request (method, endpoint, data) {
-    let url = `http://dev.alethea.commonsense.io/api/${endpoint}`
-    // let url = `http://2c7fb0c4.ngrok.io/api/${endpoint}`
+    // let url = `http://dev.alethea.commonsense.io/api/${endpoint}`
+    let url = `https://7ad8e9db.ngrok.io/api/${endpoint}`
 
     const headers = {
       'Accept': 'application/json',
