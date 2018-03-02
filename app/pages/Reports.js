@@ -134,7 +134,8 @@ const styles = StyleSheet.create({
   },
   item: {
     // alignItems: 'center',
-    width: 400,
+    // width: 400,
+    flex: 1,
     marginTop: 2,
     marginBottom: 2,
     borderTopWidth: 1,

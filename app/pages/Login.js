@@ -11,6 +11,17 @@ import { Text,
 import { NavigationActions } from 'react-navigation'
 
 class Login extends React.Component {
+
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: 'black'
+    },
+    headerLeft: null,
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }
   constructor (props) {
     super(props)
     this.state = {

@@ -8,7 +8,8 @@ import { StackNavigator } from 'react-navigation'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Reports from './pages/Reports'
-import NewReport from './pages/NewReport'
+// import NewReport from './pages/NewReport'
+import NewReportMap from './pages/NewReportMap'
 import DetailReport from './pages/DetailReport'
 import { PermissionsAndroid } from 'react-native'
 
@@ -27,8 +28,8 @@ const Aplication = StackNavigator({
     left: null
   },
   NewReport: {
-    path: 'newReport',
-    screen: NewReport,
+    path: 'NewReportMap',
+    screen: NewReportMap,
     left: null
   },
   DetailReport: {
@@ -38,7 +39,14 @@ const Aplication = StackNavigator({
   }
 }, {
   navigationOptions: {
-    header: false
+    headerStyle: {
+      backgroundColor: '#f4511e'
+    },
+    headerTitle: 'Alethea',
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
   }
 })
 
