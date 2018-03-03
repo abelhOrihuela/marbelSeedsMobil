@@ -12,6 +12,7 @@ class Home extends React.Component {
     }
   }
   componentDidAppear () {
+    console.log('Home :: componentDidAppear')
   }
   componentWillMount () {
     this._loadInitialState()

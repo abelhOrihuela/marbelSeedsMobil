@@ -1,54 +1,6 @@
-/**
- * @flow
- */
-
 import React from 'react'
-import { StackNavigator } from 'react-navigation'
-
-import Login from './pages/Login'
-import Home from './pages/Home'
-import Reports from './pages/Reports'
-// import NewReport from './pages/NewReport'
-import NewReportMap from './pages/NewReportMap'
-import DetailReport from './pages/DetailReport'
 import { PermissionsAndroid } from 'react-native'
-
-const Aplication = StackNavigator({
-  Login: {
-    screen: Login
-  },
-  Home: {
-    path: 'home',
-    screen: Home,
-    left: null
-  },
-  Reports: {
-    path: 'detail',
-    screen: Reports,
-    left: null
-  },
-  NewReport: {
-    path: 'NewReportMap',
-    screen: NewReportMap,
-    left: null
-  },
-  DetailReport: {
-    path: 'detailReport',
-    screen: DetailReport,
-    left: null
-  }
-}, {
-  navigationOptions: {
-    headerStyle: {
-      backgroundColor: '#f4511e'
-    },
-    headerTitle: 'Alethea',
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-  }
-})
+import Aplication from './stacks/mainStack.js'
 
 export default class App extends React.Component {
   async requestGeolocationPermission () {
@@ -59,7 +11,7 @@ export default class App extends React.Component {
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('You can use the geolocation')
       } else {
-        alert('Geolocation permission denied')
+        console.log('Geolocation permission denied')
       }
     } catch (err) {
       console.warn(err)
@@ -69,6 +21,7 @@ export default class App extends React.Component {
   componentDidMount () {
     this.requestGeolocationPermission()
   }
+
   render () {
     return <Aplication />
   }

@@ -2,9 +2,7 @@ import api from '../core/api'
 import React from 'react'
 import { Text,
   View,
-  // TextInput,
   TouchableOpacity,
-  // AsyncStorage,
   StyleSheet,
   FlatList
 } from 'react-native'
@@ -12,6 +10,9 @@ import { Text,
 import Moment from 'moment'
 
 class Reports extends React.Component {
+  static navigationOptions = {
+         drawerLabel: () => null
+  }
   constructor (props) {
     super(props)
     this.state = {

@@ -7,6 +7,9 @@ import { Text,
 import Moment from 'moment'
 
 class DetailReport extends React.Component {
+  static navigationOptions = {
+         drawerLabel: () => null
+  }
   constructor (props) {
     super(props)
     this.state = {

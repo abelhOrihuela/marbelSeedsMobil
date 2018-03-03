@@ -9,6 +9,9 @@ import { Text,
 } from 'react-native'
 
 class NewReport extends React.Component {
+  static navigationOptions = {
+         drawerLabel: () => null
+  }
   constructor (props) {
     super(props)
     this.state = {
